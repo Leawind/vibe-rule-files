@@ -5,18 +5,19 @@
 
 ## Overview
 
-| Tool           | Project Rule Files                             | Notes                                                                             |
-| -------------- | ---------------------------------------------- | --------------------------------------------------------------------------------- |
-| Claude Code    | `CLAUDE.md`, `.claude/rules/*.md`              | Supports `@import` syntax to include other files                                  |
-| Cline          | `.clinerules/*.md`                             | Also compatible with `.cursorrules`, `.windsurfrules`, `AGENTS.md`                |
-| CodeBuddy      | `CODEBUDDY.md`, `.codebuddy/rules/*/RULE.mdc`  | Rule types: Always, Agent Requested, Manual                                       |
-| Cursor         | `.cursor/rules/*.mdc`, `AGENTS.md`             | `.mdc` files support frontmatter to control triggering                            |
-| Gemini CLI     | `GEMINI.md`                                    | Supports `@file.md` syntax to import subfiles                                     |
-| GitHub Copilot | `.github/copilot-instructions.md`, `AGENTS.md` | Path-specific rules placed in `.github/instructions/*.instructions.md`            |
-| Kilo Code      | `.kilo/rules/*.md` (recommended)               | Configure instruction paths via `kilo.jsonc`; compatible with legacy `.kilocode/` |
-| MiMo Code      | `AGENTS.md`, `CLAUDE.md`                       | Customizable instruction file paths in `mimocode.json`                            |
-| OpenCode       | `AGENTS.md`                                    | Customizable instruction file paths in `opencode.json`                            |
-| Trae           | `.trae/rules/*.md`                             | Supports frontmatter to control trigger scenarios (e.g., `scene: git_message`)    |
+| Tool           | Project Rule Files                                                  | Notes                                                                             |
+| -------------- | ------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
+| Claude Code    | `CLAUDE.md`, `.claude/rules/*.md`                                   | Supports `@import` syntax to include other files                                  |
+| Cline          | `.clinerules/*.md`                                                  | Also compatible with `.cursorrules`, `.windsurfrules`, `AGENTS.md`                |
+| CodeBuddy      | `CODEBUDDY.md`, `.codebuddy/rules/*/RULE.mdc`                       | Rule types: Always, Agent Requested, Manual                                       |
+| Cursor         | `.cursor/rules/*.mdc`, `AGENTS.md`                                  | `.mdc` files support frontmatter to control triggering                            |
+| Gemini CLI     | `GEMINI.md`                                                         | Supports `@file.md` syntax to import subfiles                                     |
+| GitHub Copilot | `.github/copilot-instructions.md`, `AGENTS.md`                      | Path-specific rules placed in `.github/instructions/*.instructions.md`            |
+| Hermes Agent   | `.hermes.md`, `HERMES.md`, `AGENTS.md`, `CLAUDE.md`, `.cursorrules` | Supports progressive subdirectory discovery; `SOUL.md` for global personality     |
+| Kilo Code      | `.kilo/rules/*.md` (recommended)                                    | Configure instruction paths via `kilo.jsonc`; compatible with legacy `.kilocode/` |
+| MiMo Code      | `AGENTS.md`, `CLAUDE.md`                                            | Customizable instruction file paths in `mimocode.json`                            |
+| OpenCode       | `AGENTS.md`                                                         | Customizable instruction file paths in `opencode.json`                            |
+| Trae           | `.trae/rules/*.md`                                                  | Supports frontmatter to control trigger scenarios (e.g., `scene: git_message`)    |
 
 ## Tools
 
@@ -110,6 +111,30 @@ Project Rule Files:
 - Repository Level: `.github/copilot-instructions.md` — applies to the entire repository
 - Path-Specific: `.github/instructions/*.instructions.md` — filenames must end with `.instructions.md`
 - Agent Instructions: `AGENTS.md` (or `CLAUDE.md`, `GEMINI.md`) in the project root
+
+### [Hermes Agent](https://hermes-agent.nousresearch.com)
+
+> Documentation: <https://hermes-agent.nousresearch.com/docs/user-guide/features/context-files>
+
+Project Rule Files:
+
+- Primary: `.hermes.md` or `HERMES.md` — highest priority project instructions
+- Compatible: `AGENTS.md`, `CLAUDE.md`, `.cursorrules` — also detected and loaded
+- Global Personality: `SOUL.md` in `~/.hermes/` — controls agent tone and communication style
+- Cursor Rules: `.cursor/rules/*.mdc` — Cursor IDE rule modules (if no higher-priority file found)
+
+Priority System (first match wins):
+
+1. `.hermes.md` / `HERMES.md`
+2. `AGENTS.md`
+3. `CLAUDE.md`
+4. `.cursorrules`
+
+Features:
+
+- Progressive subdirectory discovery: `AGENTS.md` files in subdirectories are loaded when navigating into them
+- Security scanning: all context files are checked for prompt injection patterns
+- Size limits: files truncated at 20,000 characters (70% head, 20% tail)
 
 ### [Kilo Code](https://kilo.ai)
 

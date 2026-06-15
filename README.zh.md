@@ -5,18 +5,19 @@
 
 ## 总览
 
-| 工具           | 项目规则文件                                   | 备注                                                      |
-| -------------- | ---------------------------------------------- | --------------------------------------------------------- |
-| Claude Code    | `CLAUDE.md`、`.claude/rules/*.md`              | 支持 `@import` 语法导入其他文件                           |
-| Cline          | `.clinerules/*.md`                             | 同时兼容 `.cursorrules`、`.windsurfrules`、`AGENTS.md`    |
-| CodeBuddy      | `CODEBUDDY.md`、`.codebuddy/rules/*/RULE.mdc`  | 规则类型分为 Always、Agent Requested、Manual              |
-| Cursor         | `.cursor/rules/*.mdc`、`AGENTS.md`             | `.mdc` 文件支持 frontmatter 控制触发方式                  |
-| Gemini CLI     | `GEMINI.md`                                    | 支持 `@file.md` 语法导入子文件                            |
-| GitHub Copilot | `.github/copilot-instructions.md`、`AGENTS.md` | 路径特定规则放在 `.github/instructions/*.instructions.md` |
-| Kilo Code      | `.kilo/rules/*.md` (推荐)                      | 通过 `kilo.jsonc` 配置指令路径，兼容旧版 `.kilocode/`     |
-| MiMo Code      | `AGENTS.md`、`CLAUDE.md`                       | 可在 `mimocode.json` 中自定义指令文件路径                 |
-| OpenCode       | `AGENTS.md`                                    | 可在 `opencode.json` 中自定义指令文件路径                 |
-| Trae           | `.trae/rules/*.md`                             | 支持 frontmatter 控制触发场景（如 `scene: git_message`）  |
+| 工具           | 项目规则文件                                                        | 备注                                                      |
+| -------------- | ------------------------------------------------------------------- | --------------------------------------------------------- |
+| Claude Code    | `CLAUDE.md`、`.claude/rules/*.md`                                   | 支持 `@import` 语法导入其他文件                           |
+| Cline          | `.clinerules/*.md`                                                  | 同时兼容 `.cursorrules`、`.windsurfrules`、`AGENTS.md`    |
+| CodeBuddy      | `CODEBUDDY.md`、`.codebuddy/rules/*/RULE.mdc`                       | 规则类型分为 Always、Agent Requested、Manual              |
+| Cursor         | `.cursor/rules/*.mdc`、`AGENTS.md`                                  | `.mdc` 文件支持 frontmatter 控制触发方式                  |
+| Gemini CLI     | `GEMINI.md`                                                         | 支持 `@file.md` 语法导入子文件                            |
+| GitHub Copilot | `.github/copilot-instructions.md`、`AGENTS.md`                      | 路径特定规则放在 `.github/instructions/*.instructions.md` |
+| Hermes Agent   | `.hermes.md`、`HERMES.md`、`AGENTS.md`、`CLAUDE.md`、`.cursorrules` | 支持渐进式子目录发现；`SOUL.md` 用于全局个性定制          |
+| Kilo Code      | `.kilo/rules/*.md` (推荐)                                           | 通过 `kilo.jsonc` 配置指令路径，兼容旧版 `.kilocode/`     |
+| MiMo Code      | `AGENTS.md`、`CLAUDE.md`                                            | 可在 `mimocode.json` 中自定义指令文件路径                 |
+| OpenCode       | `AGENTS.md`                                                         | 可在 `opencode.json` 中自定义指令文件路径                 |
+| Trae           | `.trae/rules/*.md`                                                  | 支持 frontmatter 控制触发场景（如 `scene: git_message`）  |
 
 ## 工具
 
@@ -113,6 +114,30 @@
 - 路径特定: `.github/instructions/*.instructions.md` — 文件名必须以
   `.instructions.md` 结尾
 - Agent 指令: 项目根目录的 `AGENTS.md`（或 `CLAUDE.md`、`GEMINI.md`）
+
+### [Hermes Agent](https://hermes-agent.nousresearch.com)
+
+> 文档: <https://hermes-agent.nousresearch.com/docs/user-guide/features/context-files>
+
+项目规则文件:
+
+- 主要: `.hermes.md` 或 `HERMES.md` — 最高优先级的项目指令
+- 兼容: `AGENTS.md`、`CLAUDE.md`、`.cursorrules` — 同样会被检测和加载
+- 全局个性: `~/.hermes/SOUL.md` — 控制代理的语气和沟通风格
+- Cursor 规则: `.cursor/rules/*.mdc` — Cursor IDE 规则模块（如果没有更高优先级的文件）
+
+优先级系统 (第一个匹配的生效):
+
+1. `.hermes.md` / `HERMES.md`
+2. `AGENTS.md`
+3. `CLAUDE.md`
+4. `.cursorrules`
+
+特性:
+
+- 渐进式子目录发现: 导航到子目录时会自动加载其中的 `AGENTS.md` 文件
+- 安全扫描: 所有上下文文件都会检查提示注入模式
+- 大小限制: 超过 20,000 字符的文件会被截断（70% 头部，20% 尾部）
 
 ### [Kilo Code](https://kilo.ai)
 
