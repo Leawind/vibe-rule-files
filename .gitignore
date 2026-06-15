@@ -1,0 +1,44 @@
+node_modules/
+
+# Claude Code
+CLAUDE.md
+.claude/
+CLAUDE.local.md
+
+# Cline
+.clinerules/
+.cursorrules
+.windsurfrules
+
+# CodeBuddy
+CODEBUDDY.md
+.codebuddy/
+
+# Cursor
+.cursor/rules/
+AGENTS.md
+
+# Gemini CLI
+GEMINI.md
+
+# GitHub Copilot
+.github/copilot-instructions.md
+.github/instructions/
+
+# Kilo Code
+.kilo/
+.kilocode/
+kilo.jsonc
+
+# MiMo Code
+mimocode.json
+
+# OpenCode
+opencode.json
+
+# Trae
+.trae/
+
+
+# Included
+!AGENTS.md
