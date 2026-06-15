@@ -1,3 +1,6 @@
+| 中文 | [English](README.md) |
+| ---- | -------------------- |
+
 # Rule Files of Vibe Coding Tools
 
 ## 总览
