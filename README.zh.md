@@ -10,6 +10,7 @@
 | Claude Code    | `CLAUDE.md`、`.claude/rules/*.md`                                   | 支持 `@import` 语法导入其他文件                           |
 | Cline          | `.clinerules/*.md`                                                  | 同时兼容 `.cursorrules`、`.windsurfrules`、`AGENTS.md`    |
 | CodeBuddy      | `CODEBUDDY.md`、`.codebuddy/rules/*/RULE.mdc`                       | 规则类型分为 Always、Agent Requested、Manual              |
+| Codex          | `AGENTS.md`                                                         | 支持 `@import` 语法导入其他文件                           |
 | Cursor         | `.cursor/rules/*.mdc`、`AGENTS.md`                                  | `.mdc` 文件支持 frontmatter 控制触发方式                  |
 | Gemini CLI     | `GEMINI.md`                                                         | 支持 `@file.md` 语法导入子文件                            |
 | GitHub Copilot | `.github/copilot-instructions.md`、`AGENTS.md`                      | 路径特定规则放在 `.github/instructions/*.instructions.md` |
@@ -66,6 +67,16 @@
 | `Always`          | 始终生效                  |
 | `Agent Requested` | AI 根据上下文自行判断启用 |
 | `Manual`          | 仅在手动指定时生效        |
+
+### [Codex](https://github.com/openai/codex)
+
+> 文档: <https://github.com/openai/codex>
+
+项目规则文件:
+
+- 主要: 项目根目录的 `AGENTS.md` — 提供项目级指令
+- 支持 `@import` 语法导入其他文件
+- 全局: `~/.codex/AGENTS.md`（如适用）
 
 ### [Cursor](https://cursor.com)
 

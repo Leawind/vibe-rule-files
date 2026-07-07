@@ -10,6 +10,7 @@
 | Claude Code    | `CLAUDE.md`, `.claude/rules/*.md`                                   | Supports `@import` syntax to include other files                                  |
 | Cline          | `.clinerules/*.md`                                                  | Also compatible with `.cursorrules`, `.windsurfrules`, `AGENTS.md`                |
 | CodeBuddy      | `CODEBUDDY.md`, `.codebuddy/rules/*/RULE.mdc`                       | Rule types: Always, Agent Requested, Manual                                       |
+| Codex          | `AGENTS.md`                                                         | Supports `@import` syntax to include other files                                  |
 | Cursor         | `.cursor/rules/*.mdc`, `AGENTS.md`                                  | `.mdc` files support frontmatter to control triggering                            |
 | Gemini CLI     | `GEMINI.md`                                                         | Supports `@file.md` syntax to import subfiles                                     |
 | GitHub Copilot | `.github/copilot-instructions.md`, `AGENTS.md`                      | Path-specific rules placed in `.github/instructions/*.instructions.md`            |
@@ -65,6 +66,16 @@ Rule Types:
 | `Always`          | Always active                                 |
 | `Agent Requested` | AI decides whether to enable based on context |
 | `Manual`          | Active only when manually specified           |
+
+### [Codex](https://github.com/openai/codex)
+
+> Documentation: <https://github.com/openai/codex>
+
+Project Rule Files:
+
+- Primary: `AGENTS.md` in the project root — provides project-level instructions
+- Supports `@import` syntax to include other files
+- Global: `~/.codex/AGENTS.md` (if applicable)
 
 ### [Cursor](https://cursor.com)
 
