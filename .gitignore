@@ -39,6 +39,8 @@ opencode.json
 # Trae
 .trae/
 
+# ZCode
+.zcode/
 
 # Included
 !AGENTS.md
